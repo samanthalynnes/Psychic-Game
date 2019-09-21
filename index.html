@@ -2,12 +2,85 @@
 <html lang="en-us">
 
 <head>
-  <meta charset="UTF-8">
-  <title>The Psychic Game</title>
+    <meta charset="UTF-8">
+    <title>The Psychic Game</title>
 </head>
 
 <body>
 
     <h1>The Psychic Game</h1>
-        <p>Guess what letter I'm thinking of!</p>
 
+    <div>
+        <p id="directions-text">Guess what letter I'm thinking of!</p>
+        <p>Wins: <span id="wins-text"></span></p>
+        <p>Losses: <span id="losses-text"></span></p>
+        <p>Guesses Left: <span id="guessesleft-text"></span></p>
+        <p>Your Guesses So Far:<span id="yourguesses-text"></span></p>
+    </div>
+
+    <script type="text/javascript">
+
+        // Create array with all options
+
+        var psychicLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
+
+        // Create variable references
+
+        var wins = 0;
+        var losses = 0;
+        var left = 9;
+        var guesses = 9;
+        var guessesSoFar = [];
+
+        // Create variables that hold references to the places in the HTML where we want to display things.
+        var directionsText = document.getElementById("directions-text");
+        var winsText = document.getElementById("wins-text");
+        var lossesText = document.getElementById("losses-text");
+        var guessesLeftText = document.getElementById("guessesleft-text");
+        var yourGuessText = document.getElementById("yourguesses-text");
+
+        // Randomly chooses a choice from the options array
+        var psychicGuess = psychicLetters[Math.floor(Math.random() * psychicLetters.length)];
+
+        // Function to run whenever user presses letter of alphabet
+        document.onkeyup = function (event) {
+
+            
+            // Determines which key was pressed
+            var userGuess = event.key;
+            guessesSoFar.push(userGuess);
+
+            // Determine output & increments
+
+
+            if (psychicGuess === userGuess) {
+                    wins++
+                } else {
+                    guesses--;
+                if (left === 0) {
+                    losses++;
+                } else {
+                    left < 0;
+                }
+                }
+
+                update();
+        }
+        function update() {
+            winsText.textContent = wins;
+            lossesText.textContent = losses;
+            guessesLeftText.textContent = guesses;
+            yourGuessText.textContent = guessesSoFar;
+
+    };
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
