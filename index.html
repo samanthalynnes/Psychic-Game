@@ -29,7 +29,6 @@
         var wins = 0;
         var losses = 0;
         var left = 9;
-        var guesses = 9;
         var guessesSoFar = [];
 
         // Create variables that hold references to the places in the HTML where we want to display things.
@@ -42,6 +41,13 @@
         // Randomly chooses a choice from the options array
         var psychicGuess = psychicLetters[Math.floor(Math.random() * psychicLetters.length)];
 
+        // Function to reset game after a win and psychic pick a new letter
+        function reset () {
+            left = 9;
+            guessesSoFar = [];
+            psychicGuess = psychicLetters[Math.floor(Math.random() * psychicLetters.length)];
+        }
+    
         // Function to run whenever user presses letter of alphabet
         document.onkeyup = function (event) {
 
@@ -55,29 +61,25 @@
 
             if (psychicGuess === userGuess) {
                     wins++
+                    reset ();
                 } else {
-                    guesses--;
+                    left--;
+                }
                 if (left === 0) {
                     losses++;
-                } else {
-                    left < 0;
-                }
+                    reset ();
                 }
 
                 update();
         }
+        // Update the page with new stats 
         function update() {
             winsText.textContent = wins;
             lossesText.textContent = losses;
-            guessesLeftText.textContent = guesses;
+            guessesLeftText.textContent = left;
             yourGuessText.textContent = guessesSoFar;
 
     };
-
-
-
-
-
 
     </script>
 
